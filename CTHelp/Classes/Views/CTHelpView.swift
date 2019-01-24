@@ -43,8 +43,13 @@ class CTHelpView: UIView {
         }
         
         if ctHelpItem.imageName != "" {
-            imageView.image = UIImage(named: ctHelpItem.imageName)
-            if let height = UIImage(named: ctHelpItem.imageName)?.size.height {
+			let podBundle = Bundle(for: CTHelpViewController.self)
+			let bundleURL = podBundle.url(forResource: "CTHelp", withExtension: "bundle")
+			let bundle = Bundle(url: bundleURL!)
+            imageView.image = UIImage(named: ctHelpItem.imageName, in: bundle, compatibleWith: nil)
+			//imageView.image = UIImage(named: ctHelpItem.imageName)
+			//if let height = UIImage(named: ctHelpItem.imageName)?.size.height {
+			if let height = imageView.image?.size.height{
                 imageViewHeightConstraintConstant = height
             }
         }
